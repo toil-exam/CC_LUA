@@ -43,7 +43,7 @@ function Matrix.__init__()
     --    :setPosition(self.padX + 1, self.padY + 1)
 
     self.thread = self.monitor:addThread()
-        :start(Matrix.suckYourOwnDick)
+        :start(self.run)
 
     self.basalt.autoUpdate()
 
@@ -56,9 +56,12 @@ end
 --    Matrix.basalt.autoUpdate()
 --end
 
-function Matrix.suckYourOwnDick()
+function Matrix.run()
     -- do nothing idk
-    return
+    --return
+    while true do
+        os.sleep(1)
+    end
 end
 
 setmetatable(Matrix, {__call = Matrix.__init__})
