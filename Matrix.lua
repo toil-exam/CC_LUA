@@ -1,15 +1,33 @@
 Matrix = {}
 
-local basalt = require("basalt")
-local monitor = basalt.addMonitor():setMonitor("left")
 
 
 function Matrix.__init__()
     local self = {}
+
+    self.basalt = require("basalt")
+    self.monitor = basalt.addMonitor()
+        :setMonitor("left")
+        :setBackground(colors.black)
+        :setBorder(colors.green)
+
+    self.pad = 3
+
+    self.padX = self.pad * 2
+    self.padY = self.pad
+
+    self.thread = self.monitor:addThread()
+        :start()
+
+
     setmetatable(self, {__index = Matrix})
     return self
 end
 
-local aThred = monitor:addThread():start(Matrix.__init__)
+function Matrix.autoUpdate(self)
+    self.basalt.autoUpdate()
+end
 
-basalt.autoUpdate()
+local matrix = Matrix.__init__()
+
+matrix.autoUpdate(matrix)
