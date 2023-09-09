@@ -61,13 +61,13 @@ function Matrix.run()
     -- do nothing idk
     --return
     while true do
-        self.set(math.random(self.x), math.random(self.y), string.char(math.random(0,128)))
+        Matrix.set(math.random(Matrix.x), math.random(Matrix.y), string.char(math.random(0,128)))
         os.sleep(1)
     end
 end
 
 function Matrix.set(x, y, value)
-    self.text[x][y]:editLine(1, value)
+    Matrix.text[x][y]:editLine(1, value)
 end
 
 setmetatable(Matrix, {__call = Matrix.__init__})
