@@ -36,7 +36,7 @@ function Run()
 end
 
 function Set(a, b, value)
-    Matrix.text[a][b]:editLine(1, value)
+    Matrix[a][b]:editLine(1, value)
 end
 
 local thread = monitor:addThread()
