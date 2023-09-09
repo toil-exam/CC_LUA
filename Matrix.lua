@@ -30,13 +30,10 @@ end
 
 function Run()
     while true do
-        Set(math.random(x), math.random(y), string.char(math.random(0,128)))
+        Matrix[math.random(x)][math.random(y)]
+            :editLine(1, string.char(math.random(128)))
         os.sleep(1)
     end
-end
-
-function Set(a, b, value)
-    Matrix[a][b]:editLine(1, value)
 end
 
 local thread = monitor:addThread()
