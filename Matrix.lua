@@ -22,9 +22,8 @@ for a = 1, x do
         Matrix[a][b] = monitor:addTextfield()
             :setForeground(colors.green)
             :setSize(1, 1)
-            :setPosition(x + padX, y + padY)
-            
-        Matrix[a][b]:addLine("?", 1)
+            :setPosition(a + padX, y - b + padY) -- negation on y axis to make origin bottom left
+            :addLine("?", 1)
     end
 end
 
