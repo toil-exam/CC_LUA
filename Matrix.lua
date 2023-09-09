@@ -17,7 +17,7 @@ x = x - (padX * 2)
 y = y - (padY * 2)
 
 for a = 1, x do
-    Matrix[x] = {}
+    Matrix[a] = {}
     for b = 1, y do
         Matrix[a][b] = monitor:addTextfield()
             :setForeground(colors.green)
