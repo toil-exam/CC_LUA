@@ -31,7 +31,7 @@ function Matrix.__init__()
             self.text[x][y] = monitor:addTextfield()
                 :setForeground(colors.green)
                 :setSize(1, 1)
-                :setPosition(x + self.padX + 1, y + self.padY + 1)
+                :setPosition(x + self.padX, y + self.padY)
                 :addLine("?", 1)
         end
     end
@@ -74,6 +74,6 @@ end
 --local matrix = Matrix()
 
 local thread = monitor:addThread()
-    :start(Matrix.__init__)
+    :start(Matrix.run)
 
 basalt.autoUpdate()
