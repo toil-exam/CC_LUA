@@ -32,18 +32,13 @@ end
 function Run()
     while true do
         -- spawn new drip
-        Drips[math.random(x)] = 1
+        Drips[math.random(x)] = y
 
         -- iterate through drips
         for d = 1, x do
             if Drips[d] > 0 then
-                Drips[d] = Drips[d] + 1
-            end
-
-            if Drips[d] > y then
-                Drips[d] = 0
-            elseif Drips[d] > 0 then
                 Matrix[d][Drips[d]]:editLine(1, string.char(math.random(0,128)))
+                Drips[d] = Drips[d] - 1
             end
         end
 
