@@ -36,7 +36,7 @@ function Matrix.__init__()
         end
     end
 
-    self.run()
+    --self.run()
 
     --self.text = self.monitor:addTextField()
     --    :setForeground(colors.green)
@@ -70,11 +70,11 @@ function Matrix.set(self, x, y, value)
     self.text[x][y]:editLine(1, value)
 end
 
---setmetatable(Matrix, {__call = Matrix.__init__})
+setmetatable(Matrix, {__call = Matrix.__init__})
 
---local matrix = Matrix()
+local matrix = Matrix()
 
 local thread = monitor:addThread()
-    :start(Matrix.__init__)
+    :start(matrix.run)
 
 basalt.autoUpdate()
