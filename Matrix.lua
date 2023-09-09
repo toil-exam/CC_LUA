@@ -1,7 +1,7 @@
 Matrix = {}
 
-basalt = require("basalt")
-monitor = basalt.addMonitor():setMonitor("left")
+local basalt = require("basalt")
+local monitor = basalt.addMonitor():setMonitor("left")
 
 
 function Matrix.__init__()
