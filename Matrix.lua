@@ -6,7 +6,7 @@ function Matrix.__init__()
     local self = {}
 
     self.basalt = require("basalt")
-    self.monitor = basalt.addMonitor()
+    self.monitor = self.basalt.addMonitor()
         :setMonitor("left")
         :setBackground(colors.black)
         :setBorder(colors.green)
