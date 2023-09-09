@@ -1,13 +1,13 @@
 Matrix = {}
 
+local basalt = require("basalt")
+local monitor = basalt.addMonitor()
+    :setMonitor("left")
+    :setBackground(colors.black)
+    :setBorder(colors.green)
+
 function Matrix.__init__()
     local self = {}
-
-    self.basalt = require("basalt")
-    self.monitor = self.basalt.addMonitor()
-        :setMonitor("left")
-        :setBackground(colors.black)
-        :setBorder(colors.green)
 
     -- idk maybe pass this somewhere
     self.pad = 3
@@ -17,7 +17,7 @@ function Matrix.__init__()
     self.padY = self.pad
 
     -- pull monitor size and adjust per padding
-    self.x, self.y = self.monitor:getSize()
+    self.x, self.y = monitor:getSize()
 
     self.x = self.x - (self.padX * 2)
     self.y = self.y - (self.padY * 2)
@@ -28,11 +28,11 @@ function Matrix.__init__()
     for x = 1, self.x do
         self.text[x] = {}
         for y = 1, self.y do
-            self.text[x][y] = self.monitor:addTextfield()
+            self.text[x][y] = monitor:addTextfield()
                 :setForeground(colors.green)
                 :setSize(1, 1)
-                :setPosition()
-                :addLine("?")
+                :setPosition(x + self.padX + 1, y + self.padY + 1)
+                :addLine("?", 1)
         end
     end
 
@@ -42,10 +42,10 @@ function Matrix.__init__()
     --    :setSize(self.x, self.y)
     --    :setPosition(self.padX + 1, self.padY + 1)
 
-    self.thread = self.monitor:addThread()
-        :start(self.run)
+    --self.thread = self.monitor:addThread()
+    --    :start(self.run)
 
-    self.basalt.autoUpdate()
+    --self.basalt.autoUpdate()
 
 
     setmetatable(self, {__index = Matrix})
@@ -60,11 +60,20 @@ function Matrix.run()
     -- do nothing idk
     --return
     while true do
+        self.set(math.random(self.x), math.random(self.y), string.char(math.random(0,128)))
         os.sleep(1)
     end
 end
 
-setmetatable(Matrix, {__call = Matrix.__init__})
+function Matrix.set(x, y, value)
+    self.text[x][y]:editLine(1, value)
+end
 
-local matrix = Matrix()
+--setmetatable(Matrix, {__call = Matrix.__init__})
 
+--local matrix = Matrix()
+
+local thread = monitor:addThread()
+    :start(Matrix.__init__)
+
+basalt.autoUpdate()
