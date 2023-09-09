@@ -23,14 +23,15 @@ for a = 1, x do
             :setForeground(colors.green)
             :setSize(1, 1)
             :setPosition(x + padX, y + padY)
-            :addLine("?", 1)
+
+        Matrix[x][y]:addLine("?", 1)
     end
 end
 
 
 function Run()
     while true do
-        Matrix[math.random(1, x)][math.random(1, y)]
+        Matrix[math.random(x)][math.random(y)]
             :editLine(1, string.char(math.random(128)))
         os.sleep(1)
     end
