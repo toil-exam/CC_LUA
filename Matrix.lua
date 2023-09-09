@@ -31,7 +31,12 @@ end
 function Run()
     while true do
         Matrix[math.random(x)][math.random(y)]
-            :editLine(1, string.char(math.random(128)))
+            :editLine(
+                1, 
+                string.char(
+                    math.random(128)
+                )
+            )
         os.sleep(1)
     end
 end
