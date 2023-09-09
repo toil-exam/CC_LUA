@@ -23,7 +23,8 @@ for a = 1, x do
             :setForeground(colors.green)
             :setSize(1, 1)
             :setPosition(x + padX, y + padY)
-            :addLine("?", 1)
+            
+        Matrix[a][b]:addLine("?", 1)
     end
 end
 
