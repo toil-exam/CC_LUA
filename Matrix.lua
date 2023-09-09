@@ -32,7 +32,8 @@ function Matrix.__init__()
                 :setForeground(colors.green)
                 :setSize(1, 1)
                 :setPosition()
-                :addLine("x")
+
+            self.text[x][y]:addLine("?")
         end
     end
 
