@@ -17,7 +17,7 @@ function Matrix.__init__()
     self.padY = self.pad
 
     self.thread = self.monitor:addThread()
-        :start()
+        :start(Matrix.autoUpdate(self))
 
 
     setmetatable(self, {__index = Matrix})
@@ -30,4 +30,4 @@ end
 
 local matrix = Matrix.__init__()
 
-matrix.autoUpdate(matrix)
+--matrix.autoUpdate(matrix)
