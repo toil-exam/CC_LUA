@@ -57,16 +57,16 @@ end
 --    Matrix.basalt.autoUpdate()
 --end
 
-function Matrix.run(self)
+function Matrix.run()
     -- do nothing idk
     --return
     while true do
-        self.set(self, math.random(self.x), math.random(self.y), string.char(math.random(0,128)))
+        self.set(math.random(self.x), math.random(self.y), string.char(math.random(0,128)))
         os.sleep(1)
     end
 end
 
-function Matrix.set(self, x, y, value)
+function Matrix.set(x, y, value)
     self.text[x][y]:editLine(1, value)
 end
 
