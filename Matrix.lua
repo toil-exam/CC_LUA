@@ -19,15 +19,13 @@ y = y - (padY * 2)
 for a = 1, x do
     Matrix[x] = {}
     for b = 1, y do
-        Matrix[x][y] = monitor:addTextfield()
+        Matrix[a][b] = monitor:addTextfield()
             :setForeground(colors.green)
             :setSize(1, 1)
             :setPosition(x + padX, y + padY)
-
-        Matrix[x][y]:addLine("?", 1)
+            :addLine("?", 1)
     end
 end
-
 
 function Run()
     while true do
