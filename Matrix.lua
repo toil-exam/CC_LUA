@@ -6,75 +6,40 @@ local monitor = basalt.addMonitor()
     :setBackground(colors.black)
     :setBorder(colors.green)
 
-function Matrix.__init__()
-    local self = {}
+local pad = 3
 
-    -- idk maybe pass this somewhere
-    self.pad = 3
+local padX = pad * 2
+local padY = pad
 
-    -- derive x and y padding
-    self.padX = self.pad * 2
-    self.padY = self.pad
+local x, y = monitor:getSize()
 
-    -- pull monitor size and adjust per padding
-    self.x, self.y = monitor:getSize()
+x = x - (padX * 2)
+y = y - (padY * 2)
 
-    self.x = self.x - (self.padX * 2)
-    self.y = self.y - (self.padY * 2)
-
-
-    self.text = {}
-
-    for x = 1, self.x do
-        self.text[x] = {}
-        for y = 1, self.y do
-            self.text[x][y] = monitor:addTextfield()
-                :setForeground(colors.green)
-                :setSize(1, 1)
-                :setPosition(x + self.padX, y + self.padY)
-                :addLine("?", 1)
-        end
+for a = 1, x do
+    Matrix[x] = {}
+    for b = 1, y do
+        Matrix[x][y] = monitor:addTextfield()
+            :setForeground(colors.green)
+            :setSize(1, 1)
+            :setPosition(x + self.padX, y + self.padY)
+            :addLine("?", 1)
     end
-
-    --self.run()
-
-    --self.text = self.monitor:addTextField()
-    --    :setForeground(colors.green)
-    --    :setSize(self.x, self.y)
-    --    :setPosition(self.padX + 1, self.padY + 1)
-
-    --self.thread = self.monitor:addThread()
-    --    :start(self.run)
-
-    --self.basalt.autoUpdate()
-
-
-    setmetatable(self, {__index = Matrix})
-    return self
 end
 
---function Matrix.autoUpdate()
---    Matrix.basalt.autoUpdate()
---end
 
-function Matrix.run()
-    -- do nothing idk
-    --return
+function Run()
     while true do
-        Matrix.set(math.random(Matrix.x), math.random(Matrix.y), string.char(math.random(0,128)))
+        Set(math.random(x), math.random(y), string.char(math.random(0,128)))
         os.sleep(1)
     end
 end
 
-function Matrix.set(x, y, value)
-    Matrix.text[x][y]:editLine(1, value)
+function Set(a, b, value)
+    Matrix.text[a][b]:editLine(1, value)
 end
 
-setmetatable(Matrix, {__call = Matrix.__init__})
-
-local matrix = Matrix()
-
 local thread = monitor:addThread()
-    :start(matrix.run)
+    :start(Run)
 
 basalt.autoUpdate()
