@@ -19,7 +19,7 @@ y = y - (padY * 2)
 
 for a = 1, x do
     Matrix[a] = {}
-    Drips[a] = -1
+    Drips[a] = 0
     for b = 1, y do
         Matrix[a][b] = monitor:addTextfield()
             :setForeground(colors.green)
@@ -36,13 +36,13 @@ function Run()
 
         -- iterate through drips
         for d = 1, x do
-            if Drips[d] ~= 0 then
+            if Drips[d] > 0 then
                 Drips[d] = Drips[d] + 1
             end
 
             if Drips[d] > y then
                 Drips[d] = 0
-            else
+            elseif Drips[d] > 0 then
                 Matrix[d][Drips[d]]:editLine(1, string.char(math.random(0,128)))
             end
         end
