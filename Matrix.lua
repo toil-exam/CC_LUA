@@ -36,6 +36,7 @@ function Matrix.__init__()
         end
     end
 
+    self.run()
 
     --self.text = self.monitor:addTextField()
     --    :setForeground(colors.green)
@@ -56,16 +57,16 @@ end
 --    Matrix.basalt.autoUpdate()
 --end
 
-function Matrix.run()
+function Matrix.run(self)
     -- do nothing idk
     --return
     while true do
-        self.set(math.random(self.x), math.random(self.y), string.char(math.random(0,128)))
+        self.set(self, math.random(self.x), math.random(self.y), string.char(math.random(0,128)))
         os.sleep(1)
     end
 end
 
-function Matrix.set(x, y, value)
+function Matrix.set(self, x, y, value)
     self.text[x][y]:editLine(1, value)
 end
 
@@ -74,6 +75,6 @@ end
 --local matrix = Matrix()
 
 local thread = monitor:addThread()
-    :start(Matrix.run)
+    :start(Matrix.__init__)
 
 basalt.autoUpdate()
