@@ -32,8 +32,7 @@ function Matrix.__init__()
                 :setForeground(colors.green)
                 :setSize(1, 1)
                 :setPosition()
-
-            self.text[x][y]:addLine("?")
+                :addLine("?")
         end
     end
 
@@ -44,15 +43,15 @@ function Matrix.__init__()
     --    :setPosition(self.padX + 1, self.padY + 1)
 
     self.thread = self.monitor:addThread()
-        :start(Matrix.autoUpdate(self))
+        :start(Matrix.autoUpdate)
 
 
     setmetatable(self, {__index = Matrix})
     return self
 end
 
-function Matrix.autoUpdate(self)
-    self.basalt.autoUpdate()
+function Matrix.autoUpdate()
+    Matrix.basalt.autoUpdate()
 end
 
 setmetatable(Matrix, {__call = Matrix.__init__})
