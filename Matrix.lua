@@ -28,7 +28,7 @@ function Matrix.__init__()
     for x = 1, self.x do
         self.text[x] = {}
         for y = 1, self.y do
-            self.text[x][y] = self.monitor:addTextField()
+            self.text[x][y] = self.monitor:addTextfield()
                 :setForeground(colors.green)
                 :setSize(1, 1)
                 :setPosition()
