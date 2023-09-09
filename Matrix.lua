@@ -22,7 +22,7 @@ for a = 1, x do
         Matrix[x][y] = monitor:addTextfield()
             :setForeground(colors.green)
             :setSize(1, 1)
-            :setPosition(x + self.padX, y + self.padY)
+            :setPosition(x + padX, y + padY)
             :addLine("?", 1)
     end
 end
