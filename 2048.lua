@@ -54,7 +54,11 @@ for row = 1, 4 do
 end
 
 function Get(x, y)
-    return Values[x][y]
+    if (x < 1 or x > 4) or (y < 1 or y > 4) then
+        return 0
+    else
+        return Values[x][y]
+    end
 end
 
 function Set(x, y, value)
@@ -114,7 +118,21 @@ function Move(dir)
         start, finish = 4, 1
     end
 
-    
+    for row = 1, 4 do
+        temp[row] = {}
+        local counter = 1
+        for col = start, finish do
+            local value = Get(row, counter)
+            if value == Get(row, counter + 1) then
+                temp[row][#temp[row]+1] = Get(row, counter) * 2
+                counter = counter + 1
+            end
+
+            if counter == 5 then
+                break
+            end
+        end
+    end    
 
     RandomFill()
 end
@@ -127,8 +145,8 @@ end
 
 
 
-local button_x = 25
-local button_y = 5
+local button_x = 31
+local button_y = 12
 
 for i = 1, 4 do
     local dir = Dir[i][1]
