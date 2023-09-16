@@ -42,14 +42,14 @@ Dir = {
 for row = 1, 4 do
     Texts[row] = {}
     for col = 1, 4 do
-        local x = ((row - 1) * 5) + padX
-        local y = Y - ((col - 1) * 2) + padY + 1 -- negation on y axis to make origin bottom left
+        local x = ((col - 1) * 5) + padX
+        local y = ((row - 1) * 2) + padY
 
         Texts[row][col] = Monitor:addTextfield()
             :setForeground(colors.white)
-            :setSize(1, 1)
+            :setSize(5, 1)
             :setPosition(x, y)
-            :addLine(x .. ", " .. y, 1)
+            :addLine(col .. ", " .. row, 1)
     end
 end
 
