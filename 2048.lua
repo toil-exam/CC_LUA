@@ -2,32 +2,32 @@ Values = {}
 Texts = {}
 Buttons = {}
 
-local basalt = require("basalt")
-local monitor = basalt.addMonitor()
+Basalt = require("basalt")
+Monitor = Basalt.addMonitor()
     :setMonitor("left")
     :setBackground(colors.black)
     :setBorder(colors.blue)
 
 
-local pad = 3
+local padding = 3
 
-local padX = pad * 2
-local padY = pad
+local padX = padding * 2
+local padY = padding
 
-local x, y = monitor:getSize()
+X, Y = Monitor:getSize()
 
-x = x - (padX * 2)
-y = y - (padY * 2)
+X = X - (padX * 2)
+Y = Y - (padY * 2)
 
 for row = 1, 4 do
     Values[row] = {}
     Texts[row] = {}
     for col = 1, 4 do
         Values[row][col] = 0
-        Texts[row][col] = monitor:addTextfield()
+        Texts[row][col] = Monitor:addTextfield()
             :setForeground(colors.white)
             :setSize(1, 1)
-            :setPosition(row + padX, y - col + padY + 1) -- negation on y axis to make origin bottom left
+            :setPosition((row * 5) + padX, Y - (col * 2) + padY + 1) -- negation on y axis to make origin bottom left
             :addLine("0", 1)
     end
 end
@@ -43,15 +43,29 @@ local button_init = {
 local button_x = 20
 local button_y = 10
 
+
+
+
+
+
+
+
 for i = 1, 4 do
     local text = button_init[i][1]
-    local x_offset = button_init[i][2]
-    local y_offset = button_init[i][3]
+    local x_offset = button_init[i][2] * 5
+    local y_offset = button_init[i][3] * 3
 
-    Buttons.text = monitor:addButton()
+    Buttons.text = Monitor:addButton()
         :setText(text)
-        :setSize(3,3)
+        :setSize(7,1)
         :setPosition(button_x + x_offset, button_y + y_offset)
+        :onClick(
+            function(self, event, button, x, y)
+                if (event == "mouse_click") and (button == 1) then
+                    self:setText("!")
+                end
+            end
+        )
 end
 
 function Run()
@@ -63,4 +77,4 @@ end
 
 
 
-basalt.autoUpdate()
+Basalt.autoUpdate()
