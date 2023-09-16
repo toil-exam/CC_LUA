@@ -40,12 +40,18 @@ local button_init = {
     {"left", -1, 0},
 }
 
+local button_x = 20
+local button_y = 10
+
 for i = 1, 4 do
     local text = button_init[i][1]
     local x_offset = button_init[i][2]
     local y_offset = button_init[i][3]
 
-    --Buttons.text = monitor:
+    Buttons.text = monitor:addButton()
+        :setText(text)
+        :setSize(3,3)
+        :setPosition(button_x + x_offset, button_y + y_offset)
 end
 
 function Run()
