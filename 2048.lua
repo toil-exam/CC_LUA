@@ -122,7 +122,9 @@ function Move(dir)
         local counter = 1
         while counter < 5 do
             local value = Get(row, counter)
-            if value == Get(row, counter + 1) then
+            if value == 0 then
+                -- do nothing?? don't append the 0 !
+            elseif value == Get(row, counter + 1) then
                 temp[row][#temp[row]+1] = value * 2
                 counter = counter + 1
             else
