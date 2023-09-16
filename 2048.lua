@@ -61,9 +61,9 @@ function Get(x, y)
     end
 end
 
-function Set(x, y, value)
-    Values[x][y] = value
-    Texts[x][y]:editLine(1, value)
+function Set(col, row, value)
+    Values[row][col] = value
+    Texts[row][col]:editLine(1, value)
 end
 
 function RandomFill()
@@ -102,7 +102,6 @@ end
 -- init with one rando
 RandomFill()
 
-
 function Move(dir)
     local axis = "x"
     local bias = true
@@ -121,18 +120,28 @@ function Move(dir)
     for row = 1, 4 do
         temp[row] = {}
         local counter = 1
-        for col = start, finish do
+        while counter < 5 do
             local value = Get(row, counter)
             if value == Get(row, counter + 1) then
-                temp[row][#temp[row]+1] = Get(row, counter) * 2
+                temp[row][#temp[row]+1] = value * 2
                 counter = counter + 1
+            else
+                temp[row][#temp[row]+1] = value
             end
 
-            if counter == 5 then
-                break
-            end
+            counter = counter + 1
         end
-    end    
+
+        while #temp[row] < 4 do
+            temp[row][#temp[row]+1] = 0
+        end
+    end
+
+    for row = 1, 4 do
+        for col = 1, 4 do
+            Set(col, row, temp[row][col])
+        end
+    end
 
     RandomFill()
 end
