@@ -122,20 +122,26 @@ function Move(dir)
         local counter = 1
         while counter < 5 do
             local value = Get(row, counter)
-            if value == 0 then
-                -- do nothing?? don't append the 0 !
-            elseif value == Get(row, counter + 1) then
-                temp[row][#temp[row]+1] = value * 2
+            local next = 0
+
+            -- iterate to the next while also checking for zeros
+            while next == 0 and counter < 5 do
                 counter = counter + 1
-            else
-                temp[row][#temp[row]+1] = value
+                next = Get(row, counter)
             end
 
-            counter = counter + 1
+            if value == 0 then
+                -- do nothing ?? don't append the 0 !!
+            elseif value == next then
+                temp[row][#temp[row]+1] = value * 2
+                counter = counter + 1 -- iterate past the duplicate
+            else
+                temp[row][#temp[row]+1] = value -- append the non zero value
+            end
         end
 
         while #temp[row] < 4 do
-            temp[row][#temp[row]+1] = 0
+            temp[row][#temp[row]+1] = 0 -- fill with zeros
         end
     end
 
