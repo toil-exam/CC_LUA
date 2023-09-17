@@ -53,11 +53,11 @@ for row = 1, 4 do
     end
 end
 
-function Get(x, y)
-    if (x < 1 or x > 4) or (y < 1 or y > 4) then
+function Get(col, row)
+    if (col < 1 or col > 4) or (row < 1 or row > 4) then
         return 0
     else
-        return Values[x][y]
+        return Values[row][col]
     end
 end
 
@@ -71,8 +71,8 @@ function RandomFill()
 
     for row = 1, 4 do
         for col = 1, 4 do
-            if Get(row, col) == 0 then
-                empties[#empties+1] = {row, col}
+            if Get(col, row) == 0 then
+                empties[#empties+1] = {col, row}
             end
         end
     end
@@ -85,7 +85,7 @@ function RandomFill()
 
     local rando = math.random(count)
 
-    local x, y = empties[rando][1], empties[rando][2]
+    local col, row = empties[rando][1], empties[rando][2]
 
     -- 1 in 8 chance of being a 4, otherwise a 2
     local value = math.random(8)
@@ -96,7 +96,7 @@ function RandomFill()
         value = 2
     end
 
-    Set(x, y, value)
+    Set(col, row, value)
 end
 
 -- init with one rando
@@ -121,13 +121,13 @@ function Move(dir)
         temp[row] = {}
         local counter = 1
         while counter < 5 do
-            local value = Get(row, counter)
+            local value = Get(counter, row)
             local next = 0
 
             -- iterate to the next while also checking for zeros
             while next == 0 and counter < 5 do
                 counter = counter + 1
-                next = Get(row, counter)
+                next = Get(counter, row)
             end
 
             if value == 0 then
